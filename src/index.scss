@@ -1,6 +1,10 @@
+* {
+  font-family: "Inter", system-ui;
+}
+
 body {
   margin: 0;
-  font-family: "Inter", system-ui;
+
   background-color: #e7f6ff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -71,4 +75,13 @@ header {
 
 .cards {
   // gap: 40px;
+}
+
+.search-block {
+  border: 1px solid #f3f3f3;
+
+  input {
+    border: none;
+    padding: 10px;
+  }
 }

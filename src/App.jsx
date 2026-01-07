@@ -27,7 +27,13 @@ function App() {
 
       <main>
         <section className="content p-40">
-          <h1 className="mb-40">Все кроссовки</h1>
+          <div className="d-flex justify-between align-center mb-40">
+            <h1 className="">Все кроссовки</h1>
+            <form className="search-block d-flex " action="">
+              <img src="/img/search.svg" alt="" />
+              <input type="text" placeholder="Поиск..." />
+            </form>
+          </div>
 
           <div className="cards d-flex flex-wrap">
             <article className="card">
