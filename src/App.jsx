@@ -5,7 +5,17 @@ function App() {
     <div className="wrapper clear">
       <div className="overlay">
         <div className="drawer d-flex flex-column">
-          <h2 className="mb-30">Корзина</h2>
+          <h2 className="mb-30 d-flex justify-between">
+            Корзина
+            <img
+              className="cu-p"
+              height={32}
+              width={32}
+              src="/img/deleteBtn.svg"
+              alt=""
+            />
+          </h2>
+
           <div className="cartItems d-flex flex-column">
             <article className="cartItem d-flex p-20">
               <img
@@ -36,6 +46,151 @@ function App() {
               <img
                 className="sneakers mr-20"
                 src="/img/puma_x_aka.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
+                width={70}
+                height={70}
+                alt="sneakers"
+              />
+              <div className="itemDesc">
+                <p>Мужские Кроссовки Nike Air Max 270</p>
+                <div className="bottomItemDesc d-flex align-center justify-between">
+                  <b>12 999 руб.</b>
+                  <button>
+                    <img
+                      className="removeBtn"
+                      height={32}
+                      width={32}
+                      src="/img/deleteBtn.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article className="cartItem d-flex p-20">
+              <img
+                className="sneakers mr-20"
+                src="/img/nike_airmax.jpg"
                 width={70}
                 height={70}
                 alt="sneakers"

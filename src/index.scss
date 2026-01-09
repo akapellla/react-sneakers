@@ -1,3 +1,5 @@
+@use "sass:color";
+
 * {
   font-family: "Inter", system-ui;
 }
@@ -132,6 +134,7 @@ header {
 
 .cartItems {
   flex: 1;
+  margin-bottom: 40px;
 }
 .cartItem {
   border: 1px solid #f3f3f3;
@@ -207,11 +210,18 @@ header {
   transition: background 0.2s ease-in-out;
 
   &:hover {
-    background: lighten(#9dd458, 5%);
+    background: color.adjust(#9dd458, $lightness: 5%);
+  }
+
+  &:active {
+    background: color.adjust(#9dd458, $lightness: -5%);
+  }
+  &:hover svg {
+    transform: translateX(8px);
   }
 
   svg {
-    // transition: transform 0.5s ease-in-out;
+    transition: transform 0.15s ease-in-out;
     position: absolute;
     top: 22px;
     right: 33px;
