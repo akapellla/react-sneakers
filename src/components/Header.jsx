@@ -1,4 +1,4 @@
-const Header = () => {
+const Header = ({ onClickCart }) => {
   return (
     <header className="d-flex justify-between align-center p-40">
       <div className="d-flex align-center">
@@ -11,7 +11,7 @@ const Header = () => {
 
       <nav className="">
         <ul className="d-flex">
-          <li className="mr-30 d-flex align-center">
+          <li onClick={onClickCart} className="mr-30 d-flex align-center cu-p">
             <img src="/img/cart.svg" alt="" />
             <span className="">1205 руб.</span>
           </li>
