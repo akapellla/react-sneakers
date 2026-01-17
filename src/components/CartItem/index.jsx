@@ -1,10 +1,6 @@
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ item = [], onClickDelete }) => {
-  const onDelete = () => {
-    onClickDelete(item);
-  };
-
   return (
     <article className={`${styles.cartItem} d-flex p-20`}>
       <img
@@ -18,7 +14,7 @@ const CartItem = ({ item = [], onClickDelete }) => {
         <p>{item.title}</p>
         <div className="d-flex align-center justify-between">
           <b>{item.price} руб.</b>
-          <button onClick={onDelete}>
+          <button onClick={() => onClickDelete(item.id)}>
             <img height={32} width={32} src="/img/deleteBtn.svg" alt="" />
           </button>
         </div>

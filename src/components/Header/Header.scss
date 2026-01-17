@@ -1,0 +1,26 @@
+header {
+  border-bottom: 1px solid #eaeaea;
+  h3,
+  p {
+    margin: 0;
+  }
+
+  ul {
+    gap: 32px;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      gap: 10px;
+
+      span {
+        color: #5c5c5c;
+      }
+    }
+
+    .price {
+      font-weight: 600;
+    }
+  }
+}

@@ -1,18 +1,34 @@
 import styles from "./Card.module.scss";
 import React from "react";
 
-const Card = ({ title, price, imageUrl, onFavorite, onPlus }) => {
+const Card = ({
+  title,
+  price,
+  imageUrl,
+  onFavorite,
+  favorite,
+  onPlus,
+  added,
+}) => {
   const [isAdded, setIsAdded] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
   const onClickPlus = () => {
     onPlus({ title, imageUrl, price });
     setIsAdded(!isAdded);
   };
 
+  const onClickFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <article className={styles.card}>
-      <div className={styles.favorite} onClick={onFavorite}>
-        <img src="/img/unlikedheart.svg" alt="Unliked" />
+      <div className={styles.favorite} onClick={onClickFavorite}>
+        <img
+          src={isFavorite ? "img/isFavorite.svg" : "/img/unlikedheart.svg"}
+          alt="Unliked"
+        />
       </div>
 
       <img width={133} height={112} src={imageUrl} alt="nike sneakers" />
@@ -29,7 +45,7 @@ const Card = ({ title, price, imageUrl, onFavorite, onPlus }) => {
           <img
             width={32}
             height={32}
-            src={isAdded ? "/img/btnChecked.svg" : "/img/plusBtn.svg"}
+            src={added ? "/img/btnChecked.svg" : "/img/plusBtn.svg"}
             alt=""
           />
         </button>

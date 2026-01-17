@@ -1,22 +1,35 @@
-const Header = ({ onClickCart }) => {
+import "./Header.scss";
+
+const Header = ({ onClickCart, cartPrice }) => {
   return (
     <header className="d-flex justify-between align-center p-40">
       <div className="d-flex align-center">
-        <img width={40} height={40} src="/img/logo.png" alt="" />
+        <img
+          className="mr-15"
+          width={40}
+          height={40}
+          src="/img/logo.png"
+          alt=""
+        />
         <div>
           <h3 className="text-uppercase">React Sneakers</h3>
           <p className="">Магазин лучших кроссовок</p>
         </div>
       </div>
 
-      <nav className="">
+      <nav>
         <ul className="d-flex">
-          <li onClick={onClickCart} className="mr-30 d-flex align-center cu-p">
+          <li onClick={onClickCart}>
             <img src="/img/cart.svg" alt="" />
-            <span className="">1205 руб.</span>
+            <span className="price">{cartPrice} руб.</span>
+          </li>
+          <li>
+            <img src="/img/favorite.svg" alt="favorite" />
+            <span>Закладки</span>
           </li>
           <li>
             <img src="/img/user.svg" alt="" />
+            <span>Профиль</span>
           </li>
         </ul>
       </nav>

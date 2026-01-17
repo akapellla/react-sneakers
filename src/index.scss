@@ -21,18 +21,6 @@ body {
   margin: 50px auto;
 }
 
-header {
-  border-bottom: 1px solid #eaeaea;
-  img {
-    margin-right: 15px;
-  }
-
-  h3,
-  p {
-    margin: 0;
-  }
-}
-
 .content {
   h1 {
     margin: 0;
@@ -147,5 +135,41 @@ header {
     position: absolute;
     top: 22px;
     right: 33px;
+  }
+}
+
+.cartEmpty {
+  text-align: center;
+
+  h2 {
+    font-weight: 600;
+  }
+  p {
+    font-weight: 400;
+    max-width: 285px;
+    line-height: 24px;
+  }
+  .greenButton {
+    position: relative;
+    background: #9dd458;
+    border-radius: 18px;
+    padding: 18px;
+    border: none;
+    width: 245px;
+    height: 55px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover img {
+      transform: translateX(-5px);
+    }
+
+    img {
+      position: absolute;
+      left: 25px;
+      top: 20px;
+      transition: transform 0.2s ease-in-out;
+    }
   }
 }
