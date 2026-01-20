@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Drawer from "./Drawer";
-import Header from "./Header";
+import Drawer from "../Drawer";
+import Header from "../Header";
+import styles from "./Layout.module.scss";
 
 export default function Layout({
   cartOpened,
@@ -10,7 +11,7 @@ export default function Layout({
   onDeleteInCart,
 }) {
   return (
-    <div className="wrapper clear">
+    <div className={`${styles.wrapper} clear`}>
       {cartOpened && (
         <Drawer
           items={cartItems}

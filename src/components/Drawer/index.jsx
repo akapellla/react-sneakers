@@ -1,10 +1,12 @@
-import CartItem from "./CartItem";
+import CartItem from "../CartItem";
+
+import styles from "./Drawer.module.scss";
 
 const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
   const tax = cartPrice * 0.05;
   return (
-    <div className="overlay">
-      <div className="drawer d-flex flex-column">
+    <div className={`${styles.overlay}`}>
+      <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className="mb-30 d-flex justify-between">
           Корзина
           <img
@@ -19,7 +21,7 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
 
         {items.length > 0 ? (
           <>
-            <div className="cartItems d-flex flex-column">
+            <div className={`${styles.cartItems} d-flex flex-column`}>
               {items?.map((item) => (
                 <CartItem
                   key={item.imageUrl}
@@ -28,8 +30,8 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
                 />
               ))}
             </div>
-            <div className="cartTotalBlock">
-              <ul className="list">
+            <div className={`${styles.cartTotalBlock}`}>
+              <ul>
                 <li>
                   <span>Итого:</span>
                   <div></div>
@@ -42,7 +44,7 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
                 </li>
               </ul>
 
-              <button className="placeOrder">
+              <button className={`${styles.placeOrder}`}>
                 <span>Оформить заказ</span>
                 <svg
                   width="16"
@@ -70,7 +72,9 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
             </div>
           </>
         ) : (
-          <div className="cartEmpty d-flex align-center flex-column justify-center flex">
+          <div
+            className={`${styles.cartEmpty} d-flex align-center flex-column justify-center flex`}
+          >
             <img
               className="mb-20"
               width={120}
@@ -84,7 +88,7 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
               Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
             </p>
 
-            <button className="greenButton" onClick={onClickClose}>
+            <button onClick={onClickClose}>
               <img src="/img/arrow.svg" alt="arrow" />
               Вернуться назад
             </button>

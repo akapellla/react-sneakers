@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Favoritepage from "./pages/Favoritepage";
+import FavoritePage from "./pages/FavoritePage";
 import Layout from "./components/Layout";
-import Homepage from "./pages/Homepage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
-  const [favoritesItems, setFavoritesItems] = React.useState([]);
+  const [favoritesItems, setFavoritesItems] = React.useState(null);
 
   const cartPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -25,7 +25,8 @@ function App() {
 
     axios
       .get("https://69658430f6de16bde44a826c.mockapi.io/favorite")
-      .then((res) => setFavoritesItems(res.data));
+      .then((res) => setFavoritesItems(res.data))
+      .catch(() => setFavoritesItems([]));
   }, []);
 
   const onAddToCart = async (obj) => {
@@ -105,11 +106,10 @@ function App() {
           />
         }
       >
-        {/* Главная страница */}
         <Route
           index
           element={
-            <Homepage
+            <HomePage
               items={items}
               cartItems={cartItems}
               favoritesItems={favoritesItems}
@@ -124,7 +124,7 @@ function App() {
         <Route
           path="favorites"
           element={
-            <Favoritepage
+            <FavoritePage
               favoritesItems={favoritesItems}
               cartItems={cartItems}
               onAddToCart={onAddToCart}

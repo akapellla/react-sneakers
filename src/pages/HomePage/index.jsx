@@ -1,6 +1,7 @@
-import Card from "../components/Card";
+import Card from "../../components/Card";
+import styles from "./HomePage.module.scss";
 
-const Homepage = ({
+const HomePage = ({
   items,
   cartItems,
   favoritesItems,
@@ -13,7 +14,7 @@ const Homepage = ({
     <section className="content p-40">
       <div className="d-flex justify-between align-center mb-40">
         <h1 className="">Все кроссовки</h1>
-        <form className="search-block d-flex " action="">
+        <form className={`${styles.searchBlock} d-flex`} action="">
           <img src="/img/search.svg" alt="" />
           <input
             value={searchValue}
@@ -31,7 +32,7 @@ const Homepage = ({
           )
           .map((item, index) => {
             const isAdded = cartItems.some((c) => c.imageUrl === item.imageUrl);
-            const isFavorite = favoritesItems.some(
+            const isFavorite = favoritesItems?.some(
               (c) => c.imageUrl === item.imageUrl
             );
 
@@ -53,4 +54,4 @@ const Homepage = ({
   );
 };
 
-export default Homepage;
+export default HomePage;
