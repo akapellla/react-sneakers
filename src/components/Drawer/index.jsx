@@ -1,9 +1,14 @@
 import CartItem from "../CartItem";
+import EmptyState from "../EmptyState";
+
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Drawer.module.scss";
 
 const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
   const tax = cartPrice * 0.05;
+  const navigate = useNavigate();
+
   return (
     <div className={`${styles.overlay}`}>
       <div className={`${styles.drawer} d-flex flex-column`}>
@@ -75,23 +80,12 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
           <div
             className={`${styles.cartEmpty} d-flex align-center flex-column justify-center flex`}
           >
-            <img
-              className="mb-20"
-              width={120}
-              height={120}
-              src="img/emptyCart.svg"
-              alt=""
+            <EmptyState
+              title="Корзина пустая"
+              description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+              imageUrl="img/emptyCart.svg"
+              onClick={onClickClose}
             />
-
-            <h2 className="mb-10">Корзина пустая</h2>
-            <p className="opacity-6 mb-40">
-              Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-            </p>
-
-            <button onClick={onClickClose}>
-              <img src="/img/arrow.svg" alt="arrow" />
-              Вернуться назад
-            </button>
           </div>
         )}
       </div>

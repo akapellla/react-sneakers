@@ -100,27 +100,4 @@
     max-width: 285px;
     line-height: 24px;
   }
-  button {
-    position: relative;
-    background: #9dd458;
-    border-radius: 18px;
-    padding: 18px;
-    border: none;
-    width: 245px;
-    height: 55px;
-    color: #ffffff;
-    font-size: 16px;
-    cursor: pointer;
-
-    &:hover img {
-      transform: translateX(-5px);
-    }
-
-    img {
-      position: absolute;
-      left: 25px;
-      top: 20px;
-      transition: transform 0.2s ease-in-out;
-    }
-  }
 }

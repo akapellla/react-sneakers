@@ -30,15 +30,18 @@ const HomePage = ({
           .filter((item) =>
             item.title.toLowerCase().includes(searchValue.toLowerCase())
           )
-          .map((item, index) => {
-            const isAdded = cartItems.some((c) => c.imageUrl === item.imageUrl);
+          .map((item) => {
+            const isAdded = cartItems.some(
+              (cart) => String(cart.productId) === String(item.id)
+            );
             const isFavorite = favoritesItems?.some(
-              (c) => c.imageUrl === item.imageUrl
+              (fav) => String(fav.productId) === String(item.id)
             );
 
             return (
               <Card
-                key={index}
+                key={item.id}
+                id={item.id}
                 title={item.title}
                 price={item.price}
                 imageUrl={item.imageUrl}

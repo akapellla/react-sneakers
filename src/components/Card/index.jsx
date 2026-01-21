@@ -2,6 +2,7 @@ import styles from "./Card.module.scss";
 import React from "react";
 
 const Card = ({
+  id,
   title,
   price,
   imageUrl,
@@ -11,11 +12,11 @@ const Card = ({
   added,
 }) => {
   const onClickPlus = () => {
-    onPlus({ title, imageUrl, price });
+    onPlus({ id, title, imageUrl, price });
   };
 
   const onClickFavorite = () => {
-    onFavorite({ title, imageUrl, price });
+    onFavorite({ id, title, imageUrl, price });
   };
 
   return (

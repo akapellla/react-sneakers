@@ -11,10 +11,15 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
   const [favoritesItems, setFavoritesItems] = React.useState(null);
+  const [orders, setOrders] = React.useState([]);
 
   const cartPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   React.useEffect(() => {
+    axios
+      .get("https://69658430f6de16bde44a826c.mockapi.io/orders")
+      .then((res) => setOrders(res.data));
+
     axios
       .get("https://69658430f6de16bde44a826c.mockapi.io/items")
       .then((res) => setItems(res.data));
@@ -29,8 +34,10 @@ function App() {
       .catch(() => setFavoritesItems([]));
   }, []);
 
-  const onAddToCart = async (obj) => {
-    const existing = cartItems.find((item) => item.imageUrl === obj.imageUrl);
+  const onAddToCart = async (product) => {
+    const existing = cartItems.find(
+      (cart) => String(cart.productId) === String(product.id)
+    );
 
     try {
       if (existing) {
@@ -38,11 +45,13 @@ function App() {
           `https://69658430f6de16bde44a826c.mockapi.io/cart/${existing.id}`
         );
 
-        setCartItems((prev) => prev.filter((item) => item.id !== existing.id));
+        setCartItems((prev) =>
+          prev.filter((cart) => cart.productId !== existing.id)
+        );
       } else {
         const res = await axios.post(
           "https://69658430f6de16bde44a826c.mockapi.io/cart",
-          obj
+          { ...product, productId: product.id }
         );
         setCartItems((prev) => [...prev, res.data]);
       }
@@ -51,9 +60,11 @@ function App() {
     }
   };
 
-  const onAddToFavorite = async (obj) => {
+  const onAddToFavorite = async (product) => {
+    if (!favoritesItems) return;
+
     const existing = favoritesItems.find(
-      (item) => item.imageUrl === obj.imageUrl
+      (fav) => String(fav.productId) === String(product.id)
     );
 
     try {
@@ -63,12 +74,12 @@ function App() {
         );
 
         setFavoritesItems((prev) =>
-          prev.filter((item) => item.id !== existing.id)
+          prev.filter((fav) => fav.id !== existing.id)
         );
       } else {
         const res = await axios.post(
           "https://69658430f6de16bde44a826c.mockapi.io/favorite",
-          obj
+          { ...product, productId: product.id }
         );
         setFavoritesItems((prev) => [...prev, res.data]);
       }
