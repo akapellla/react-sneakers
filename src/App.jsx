@@ -45,9 +45,7 @@ function App() {
           `https://69658430f6de16bde44a826c.mockapi.io/cart/${existing.id}`
         );
 
-        setCartItems((prev) =>
-          prev.filter((cart) => cart.productId !== existing.id)
-        );
+        setCartItems((prev) => prev.filter((cart) => cart.id !== existing.id));
       } else {
         const res = await axios.post(
           "https://69658430f6de16bde44a826c.mockapi.io/cart",
