@@ -6,13 +6,7 @@ const Header = ({ onClickCart, cartPrice }) => {
     <header className="d-flex justify-between align-center p-40">
       <Link to="/">
         <div className="d-flex align-center">
-          <img
-            className="mr-15"
-            width={40}
-            height={40}
-            src="/img/logo.png"
-            alt=""
-          />
+          <img className="mr-15" width={40} height={40} src="/img/logo.png" alt="" />
           <div>
             <h3 className="text-uppercase">React Sneakers</h3>
             <p className="">Магазин лучших кроссовок</p>
@@ -33,8 +27,10 @@ const Header = ({ onClickCart, cartPrice }) => {
             </Link>
           </li>
           <li>
-            <img src="/img/user.svg" alt="" />
-            <span>Профиль</span>
+            <Link to="/profile">
+              <img src="/img/user.svg" alt="" />
+              <span>Профиль</span>
+            </Link>
           </li>
         </ul>
       </nav>

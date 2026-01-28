@@ -2,15 +2,9 @@ import Card from "../../components/Card";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./FavoritePage.module.scss";
-import BackButton from "../../components/BackButton";
 import EmptyState from "../../components/EmptyState";
 
-const FavoritePage = ({
-  favoritesItems,
-  cartItems,
-  onAddToCart,
-  onAddToFavorite,
-}) => {
+const FavoritePage = ({ favoritesItems, cartItems, onAddToCart, onAddToFavorite }) => {
   const navigate = useNavigate();
 
   if (favoritesItems === null) {
@@ -44,9 +38,7 @@ const FavoritePage = ({
       </div>
       <div className="cards d-flex flex-wrap">
         {favoritesItems.map((item) => {
-          const isAdded = cartItems.some(
-            (fav) => String(fav.productId) === String(item.productId)
-          );
+          const isAdded = cartItems.some((fav) => String(fav.productId) === String(item.productId));
 
           return (
             <Card

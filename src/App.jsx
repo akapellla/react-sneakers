@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import FavoritePage from "./pages/FavoritePage";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -12,6 +13,9 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [favoritesItems, setFavoritesItems] = React.useState(null);
   const [orders, setOrders] = React.useState([]);
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
+  const [isOrdering, setIsOrdering] = React.useState(false);
 
   const cartPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -35,22 +39,18 @@ function App() {
   }, []);
 
   const onAddToCart = async (product) => {
-    const existing = cartItems.find(
-      (cart) => String(cart.productId) === String(product.id)
-    );
+    const existing = cartItems.find((cart) => String(cart.productId) === String(product.id));
 
     try {
       if (existing) {
-        await axios.delete(
-          `https://69658430f6de16bde44a826c.mockapi.io/cart/${existing.id}`
-        );
+        await axios.delete(`https://69658430f6de16bde44a826c.mockapi.io/cart/${existing.id}`);
 
         setCartItems((prev) => prev.filter((cart) => cart.id !== existing.id));
       } else {
-        const res = await axios.post(
-          "https://69658430f6de16bde44a826c.mockapi.io/cart",
-          { ...product, productId: product.id }
-        );
+        const res = await axios.post("https://69658430f6de16bde44a826c.mockapi.io/cart", {
+          ...product,
+          productId: product.id,
+        });
         setCartItems((prev) => [...prev, res.data]);
       }
     } catch (e) {
@@ -58,27 +58,46 @@ function App() {
     }
   };
 
+  const onOrderItem = async () => {
+    if (cartItems.length === 0) return;
+
+    try {
+      setIsOrdering(true);
+      const res = await axios.post("https://69658430f6de16bde44a826c.mockapi.io/orders", {
+        orderItems: cartItems,
+      });
+      setOrders((prev) => [...prev, res.data]);
+      setOrderId(res.data.id);
+      setIsOrderComplete(true);
+
+      await Promise.all(
+        cartItems.map((item) =>
+          axios.delete(`https://69658430f6de16bde44a826c.mockapi.io/cart/${item.id}`)
+        ) //очищаем корзину в бд
+      );
+      setCartItems([]); //очищаем состояние корзины
+    } catch (e) {
+      console.error("order error:", e);
+    } finally {
+      setIsOrdering(false);
+    }
+  };
+
   const onAddToFavorite = async (product) => {
     if (!favoritesItems) return;
 
-    const existing = favoritesItems.find(
-      (fav) => String(fav.productId) === String(product.id)
-    );
+    const existing = favoritesItems.find((fav) => String(fav.productId) === String(product.id));
 
     try {
       if (existing) {
-        await axios.delete(
-          `https://69658430f6de16bde44a826c.mockapi.io/favorite/${existing.id}`
-        );
+        await axios.delete(`https://69658430f6de16bde44a826c.mockapi.io/favorite/${existing.id}`);
 
-        setFavoritesItems((prev) =>
-          prev.filter((fav) => fav.id !== existing.id)
-        );
+        setFavoritesItems((prev) => prev.filter((fav) => fav.id !== existing.id));
       } else {
-        const res = await axios.post(
-          "https://69658430f6de16bde44a826c.mockapi.io/favorite",
-          { ...product, productId: product.id }
-        );
+        const res = await axios.post("https://69658430f6de16bde44a826c.mockapi.io/favorite", {
+          ...product,
+          productId: product.id,
+        });
         setFavoritesItems((prev) => [...prev, res.data]);
       }
     } catch (e) {
@@ -88,9 +107,7 @@ function App() {
 
   const onDeleteInCart = async (id) => {
     try {
-      await axios.delete(
-        `https://69658430f6de16bde44a826c.mockapi.io/cart/${id}`
-      );
+      await axios.delete(`https://69658430f6de16bde44a826c.mockapi.io/cart/${id}`);
       setCartItems((prev) => prev.filter((item) => item.id !== id));
     } catch (e) {
       console.error("Delete error:", e);
@@ -112,6 +129,15 @@ function App() {
             cartItems={cartItems}
             cartPrice={cartPrice}
             onDeleteInCart={onDeleteInCart}
+            onClickOrder={onOrderItem}
+            isOrderComplete={isOrderComplete}
+            orderId={orderId}
+            isOrdering={isOrdering}
+            onCloseCart={() => {
+              setCartOpened(false);
+              setIsOrderComplete(false);
+              setOrderId(null);
+            }}
           />
         }
       >
@@ -139,6 +165,12 @@ function App() {
               onAddToCart={onAddToCart}
               onAddToFavorite={onAddToFavorite}
             />
+          }
+        />
+        <Route
+          path="profile"
+          element={
+            <ProfilePage orders={orders} cartItems={cartItems} favoritesItems={favoritesItems} />
           }
         />
       </Route>

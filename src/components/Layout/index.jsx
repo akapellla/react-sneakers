@@ -9,6 +9,11 @@ export default function Layout({
   cartItems,
   cartPrice,
   onDeleteInCart,
+  onClickOrder,
+  isOrderComplete,
+  orderId,
+  isOrdering,
+  onCloseCart,
 }) {
   return (
     <div className={`${styles.wrapper} clear`}>
@@ -18,6 +23,11 @@ export default function Layout({
           onClickDelete={onDeleteInCart}
           onClickClose={() => setCartOpened(false)}
           cartPrice={cartPrice}
+          onClickOrder={onClickOrder}
+          isOrderComplete={isOrderComplete}
+          orderId={orderId}
+          isOrdering={isOrdering}
+          onCloseCart={onCloseCart}
         />
       )}
       <Header onClickCart={() => setCartOpened(true)} cartPrice={cartPrice} />

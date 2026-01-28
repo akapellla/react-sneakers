@@ -5,9 +5,22 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./Drawer.module.scss";
 
-const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
+const Drawer = ({
+  items = [],
+  onClickClose,
+  onClickDelete,
+  cartPrice,
+  onClickOrder,
+  isOrderComplete,
+  orderId,
+  isOrdering,
+  onCloseCart,
+}) => {
   const tax = cartPrice * 0.05;
-  const navigate = useNavigate();
+
+  const handleClose = () => {
+    onClickClose();
+  };
 
   return (
     <div className={`${styles.overlay}`}>
@@ -28,11 +41,7 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
           <>
             <div className={`${styles.cartItems} d-flex flex-column`}>
               {items?.map((item) => (
-                <CartItem
-                  key={item.imageUrl}
-                  item={item}
-                  onClickDelete={onClickDelete}
-                />
+                <CartItem key={item.imageUrl} item={item} onClickDelete={onClickDelete} />
               ))}
             </div>
             <div className={`${styles.cartTotalBlock}`}>
@@ -49,8 +58,9 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
                 </li>
               </ul>
 
-              <button className={`${styles.placeOrder}`}>
-                <span>Оформить заказ</span>
+              <button className={`${styles.placeOrder}`} onClick={onClickOrder}>
+                <span>{isOrdering ? "Оформляем..." : "Оформить заказ"}</span>
+
                 <svg
                   width="16"
                   height="14"
@@ -76,6 +86,17 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
               </button>
             </div>
           </>
+        ) : isOrderComplete ? (
+          <div
+            className={`${styles.cartEmpty} d-flex align-center flex-column justify-center flex`}
+          >
+            <EmptyState
+              title="Заказ оформлен!"
+              description={`Ваш заказ №${orderId} скоро передадут в доставку.`}
+              imageUrl="img/orderComplete.png"
+              onClick={handleClose}
+            />
+          </div>
         ) : (
           <div
             className={`${styles.cartEmpty} d-flex align-center flex-column justify-center flex`}
@@ -84,7 +105,7 @@ const Drawer = ({ items = [], onClickClose, onClickDelete, cartPrice }) => {
               title="Корзина пустая"
               description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
               imageUrl="img/emptyCart.svg"
-              onClick={onClickClose}
+              onClick={handleClose}
             />
           </div>
         )}
