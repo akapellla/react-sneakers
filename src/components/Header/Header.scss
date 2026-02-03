@@ -7,12 +7,18 @@ header {
 
   ul {
     gap: 32px;
+
     li {
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      gap: 10px;
+      gap: 8px;
+
+      a {
+        display: flex;
+        gap: 8px;
+      }
 
       span {
         color: #5c5c5c;

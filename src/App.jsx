@@ -17,6 +17,8 @@ function App() {
   const [orderId, setOrderId] = React.useState(null);
   const [isOrdering, setIsOrdering] = React.useState(false);
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
   const cartPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   React.useEffect(() => {
@@ -25,17 +27,18 @@ function App() {
       .then((res) => setOrders(res.data));
 
     axios
-      .get("https://69658430f6de16bde44a826c.mockapi.io/items")
-      .then((res) => setItems(res.data));
-
+      .get("https://69658430f6de16bde44a826c.mockapi.io/favorite")
+      .then((res) => setFavoritesItems(res.data))
+      .catch(() => setFavoritesItems([]));
     axios
       .get("https://69658430f6de16bde44a826c.mockapi.io/cart")
       .then((res) => setCartItems(res.data));
 
     axios
-      .get("https://69658430f6de16bde44a826c.mockapi.io/favorite")
-      .then((res) => setFavoritesItems(res.data))
-      .catch(() => setFavoritesItems([]));
+      .get("https://69658430f6de16bde44a826c.mockapi.io/items")
+      .then((res) => setItems(res.data));
+
+    setIsLoading(false);
   }, []);
 
   const onAddToCart = async (product) => {
@@ -152,6 +155,7 @@ function App() {
               onAddToFavorite={onAddToFavorite}
               onAddToCart={onAddToCart}
               onChangeSearchInput={onChangeSearchInput}
+              isLoading={isLoading}
             />
           }
         />
