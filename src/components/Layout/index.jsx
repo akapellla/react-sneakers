@@ -17,19 +17,19 @@ export default function Layout({
 }) {
   return (
     <div className={`${styles.wrapper} clear`}>
-      {cartOpened && (
-        <Drawer
-          items={cartItems}
-          onClickDelete={onDeleteInCart}
-          onClickClose={() => setCartOpened(false)}
-          cartPrice={cartPrice}
-          onClickOrder={onClickOrder}
-          isOrderComplete={isOrderComplete}
-          orderId={orderId}
-          isOrdering={isOrdering}
-          onCloseCart={onCloseCart}
-        />
-      )}
+      <Drawer
+        items={cartItems}
+        onClickDelete={onDeleteInCart}
+        onClickClose={() => setCartOpened(false)}
+        cartPrice={cartPrice}
+        onClickOrder={onClickOrder}
+        isOrderComplete={isOrderComplete}
+        orderId={orderId}
+        isOrdering={isOrdering}
+        onCloseCart={onCloseCart}
+        cartOpened={cartOpened}
+      />
+
       <Header onClickCart={() => setCartOpened(true)} cartPrice={cartPrice} />
       <main>
         <Outlet />

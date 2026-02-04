@@ -47,9 +47,23 @@ const FavoritePage = ({ favoritesItems, cartItems, onAddToCart, onAddToFavorite 
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
-              onPlus={() => onAddToCart(item)}
+              onPlus={() =>
+                onAddToCart({
+                  id: item.productId,
+                  title: item.title,
+                  imageUrl: item.imageUrl,
+                  price: item.price,
+                })
+              }
               added={isAdded}
-              onFavorite={(obj) => onAddToFavorite(obj)}
+              onFavorite={() =>
+                onAddToFavorite({
+                  id: item.productId,
+                  title: item.title,
+                  imageUrl: item.imageUrl,
+                  price: item.price,
+                })
+              }
               favorite={true}
             />
           );

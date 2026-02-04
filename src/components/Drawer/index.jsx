@@ -1,8 +1,6 @@
 import CartItem from "../CartItem";
 import EmptyState from "../EmptyState";
 
-import { useNavigate } from "react-router-dom";
-
 import styles from "./Drawer.module.scss";
 
 const Drawer = ({
@@ -14,7 +12,7 @@ const Drawer = ({
   isOrderComplete,
   orderId,
   isOrdering,
-  onCloseCart,
+  cartOpened,
 }) => {
   const tax = cartPrice * 0.05;
 
@@ -23,7 +21,7 @@ const Drawer = ({
   };
 
   return (
-    <div className={`${styles.overlay}`}>
+    <div className={`${styles.overlay} ${cartOpened ? styles.overlayVisible : ""}`}>
       <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className="mb-30 d-flex justify-between">
           Корзина
